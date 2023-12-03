@@ -1,8 +1,7 @@
+import sys
 import unittest
-import sys 
 sys.path.append('../Models')
 from User import Gerente
-
 
 
 class TestGerente(unittest.TestCase):

@@ -1,8 +1,9 @@
 import sys
 import unittest
-sys.path.append('Models')
+sys.path.append('../Models')
 from Produto import Produto
 from Estoque import Estoque
+
 
 class TestEstoque(unittest.TestCase):
     def setUp(self):

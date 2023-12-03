@@ -1,13 +1,7 @@
+import sys
 import unittest
-
-import sys 
-
-sys.path.append('Models')
-
+sys.path.append('../Models')
 from User import Usuario
-
-
-
 
 
 class TestUsuario(unittest.TestCase):

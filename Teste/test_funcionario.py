@@ -1,11 +1,7 @@
-
-# test_funcionario.py
-
-
-import sys 
+import sys
+import unittest
 sys.path.append('../Models')
 from User import Funcionario
-import unittest
 
 class TestFuncionario(unittest.TestCase):
     def test_init(self):
