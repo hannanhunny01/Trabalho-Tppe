@@ -35,5 +35,11 @@ class TestEstoque(unittest.TestCase):
         if qnt_remover >= initial_quantity:
             self.assertNotIn("123456789", [estoque["produto"].codigo_barras for estoque in self.estoque.estoque_cadastrado])
 
+    def test_editar_estoque(self):
+        self.estoque = Estoque(self.produto, 10, "2022-01-01", "2022-01-31", "entrada")
+        self.estoque.cadastrar_estoque()
+        self.estoque.editar_estoque("123456789", {"qnt_produto": 20})
+        self.assertEqual(self.estoque.estoque_cadastrado[0]["qnt_produto"], 20)
+        
 if __name__ == '__main__':
     unittest.main()
