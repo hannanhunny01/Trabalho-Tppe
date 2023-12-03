@@ -9,7 +9,6 @@ class TestProduto(unittest.TestCase):
         produto = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Roupa")
         produto2 = Produto(descricao="Arroz", codigo_barras="0987654321", custo=15.0, preco_venda=25.0, fornecedor="Fornecedor B", categoria="Alimento")
 
-
         self.assertEqual(produto.descricao, "Camiseta")
         self.assertEqual(produto.codigo_barras, "1234567890")
         self.assertEqual(produto.custo, 10.0)
@@ -29,6 +28,10 @@ class TestProduto(unittest.TestCase):
         produto2 = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=-10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Roupa")
         self.assertFalse(produto.cadastrar_produto())
         self.assertFalse(produto2.cadastrar_produto())
+
+    def test_remover_produto(self):
+        produto = Produto(descricao="Carro", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor B", categoria="Automovel")
+        self.assertFalse(produto.remover_produto())
 
 
 if __name__ == '__main__':
