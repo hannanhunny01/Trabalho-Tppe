@@ -39,3 +39,10 @@ class Categoria:
 
         print(f"A categoria '{self.nome}' não existe!")
         return False
+    
+    def obter_categoria_por_nome(nome):
+        for categoria in Categoria.categorias_cadastradas:
+            if categoria.nome == nome:
+                print(f"Categoria '{nome}' encontrada!")
+                return nome
+        return False
