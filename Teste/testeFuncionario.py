@@ -3,7 +3,7 @@
 
 
 import sys 
-sys.path.append('Models')
+sys.path.append('../Models')
 from User import Funcionario
 import unittest
 
