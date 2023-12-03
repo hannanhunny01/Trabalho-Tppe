@@ -14,7 +14,7 @@ class TestCategoria(unittest.TestCase):
 
     def test_cadastrar_categoria(self):
         categoria = Categoria(nome="Alimento")
-        self.assertFalse(categoria.cadastrar_categoria()) 
+        self.assertTrue(categoria.cadastrar_categoria()) 
 
         categoria = Categoria(nome="    ")
         self.assertFalse(categoria.cadastrar_categoria())
@@ -23,7 +23,7 @@ class TestCategoria(unittest.TestCase):
         self.assertFalse(categoria.cadastrar_categoria())
 
         categoria = Categoria(nome="Eletrônicos")
-        self.assertFalse(categoria.cadastrar_categoria())
+        self.assertTrue(categoria.cadastrar_categoria())
 
         self.assertEqual(len(Categoria.categorias_cadastradas), 2)
 
@@ -31,7 +31,10 @@ class TestCategoria(unittest.TestCase):
 
     def test_remover_categoria(self):
         categoria = Categoria(nome="Alimento")
-        self.assertFalse(categoria.remover_categoria()) 
+        self.assertTrue(categoria.remover_categoria()) 
+
+        categoria = Categoria(nome="Outro")
+        self.assertFalse(categoria.remover_categoria())
 
 
 
