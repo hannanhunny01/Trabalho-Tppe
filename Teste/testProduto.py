@@ -30,6 +30,10 @@ class TestProduto(unittest.TestCase):
         self.assertEqual(produto2.categoria, "Alimento")
 
     def test_cadastrar_produto(self):
+        categoria1 = Categoria("Alimento")
+        categoria2 = Categoria("Roupa")
+        categoria1.cadastrar_categoria()
+        categoria2.cadastrar_categoria()
 
         produto = Produto(descricao="Coxinha", codigo_barras="712736221", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Alimento")
         produto2 = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=-10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Roupa")
@@ -37,6 +41,8 @@ class TestProduto(unittest.TestCase):
         self.assertFalse(produto2.cadastrar_produto())
 
     def test_remover_produto(self):
+        categoria1 = Categoria("Automovel")
+        categoria1.cadastrar_categoria()
 
         produto = Produto(descricao="Carro", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor B", categoria="Automovel")
         produto.cadastrar_produto()
@@ -44,6 +50,8 @@ class TestProduto(unittest.TestCase):
         self.assertFalse(produto.remover_produto("17271364562"))
 
     def test_editar_produto(self):
+        categoria1 = Categoria("Alimento")
+        categoria1.cadastrar_categoria()
 
         produto = Produto(descricao="Coxinha", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Alimento")
         produto.cadastrar_produto()
