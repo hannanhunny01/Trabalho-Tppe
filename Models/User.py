@@ -9,6 +9,24 @@ class Usuario:
     def exibir_informacoes(self):
         return f"Nome: {self.nome}\nTelefone: {self.telefone}\nEmail: {self.email}"
     
+    def listar_usuarios(usuarios):
+        return usuarios
+
+    def salvar_usuario(self, usuarios):
+        usuarios.append(self)
+        return usuarios
+
+    def atualizar_usuario(self, usuarios):
+        for i, usuario in enumerate(usuarios):
+            if usuario.email == self.email:
+                usuarios[i] = self
+                break
+        return usuarios
+
+    @staticmethod
+    def excluir_usuario(email, usuarios):
+        usuarios = [usuario for usuario in usuarios if usuario.email != email]
+        return usuarios
 
 
 
