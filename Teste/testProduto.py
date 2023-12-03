@@ -36,8 +36,10 @@ class TestProduto(unittest.TestCase):
         self.assertFalse(produto.remover_produto("17271364562"))
 
     def test_editar_produto(self):
-        produto = Produto(descricao="Produto Teste", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor Teste", categoria="Categoria Teste")
-        self.assertFalse(produto.editar_produto())
+        produto = Produto(descricao="Coxinha", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Alimento")
+        produto.cadastrar_produto()
+        self.assertFalse(produto.editar_produto("1234567890", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": 10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"}))
+        self.assertFalse(produto.editar_produto("1234567850", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": 10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"}))
 
 
 
