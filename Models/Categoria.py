@@ -29,3 +29,13 @@ class Categoria:
 
         print(f"A categoria '{self.nome}' não existe!")
         return False
+    
+    def editar_categoria(self, novo_nome):
+        for categoria in Categoria.categorias_cadastradas:
+            if categoria.nome == self.nome:
+                categoria.nome = novo_nome
+                print(f"Categoria '{self.nome}' editada com sucesso!")
+                return True
+
+        print(f"A categoria '{self.nome}' não existe!")
+        return False
