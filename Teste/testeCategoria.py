@@ -29,6 +29,11 @@ class TestCategoria(unittest.TestCase):
 
         self.assertEqual(Categoria.categorias_cadastradas[0].nome, "Alimento")
 
+    def test_remover_categoria(self):
+        categoria = Categoria(nome="Alimento")
+        self.assertFalse(categoria.remover_categoria()) 
+
+
 
 if __name__ == '__main__':
     unittest.main()
