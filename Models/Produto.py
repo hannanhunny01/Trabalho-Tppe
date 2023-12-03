@@ -10,6 +10,10 @@ class Produto:
         self.categoria = categoria
     
     def cadastrar_produto(self):
+        if self.custo < 0 or self.preco_venda < 0:
+            print("O custo e o preço de venda não podem ser negativos!")
+            return False
+
         produto_info = {
             "descricao": self.descricao,
             "codigo_barras": self.codigo_barras,
