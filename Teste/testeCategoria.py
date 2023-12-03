@@ -16,6 +16,19 @@ class TestCategoria(unittest.TestCase):
         categoria = Categoria(nome="Alimento")
         self.assertFalse(categoria.cadastrar_categoria()) 
 
+        categoria = Categoria(nome="    ")
+        self.assertFalse(categoria.cadastrar_categoria())
+
+        categoria = Categoria(nome="Alimento")
+        self.assertFalse(categoria.cadastrar_categoria())
+
+        categoria = Categoria(nome="Eletrônicos")
+        self.assertFalse(categoria.cadastrar_categoria())
+
+        self.assertEqual(len(Categoria.categorias_cadastradas), 2)
+
+        self.assertEqual(Categoria.categorias_cadastradas[0].nome, "Alimento")
+
 
 if __name__ == '__main__':
     unittest.main()
