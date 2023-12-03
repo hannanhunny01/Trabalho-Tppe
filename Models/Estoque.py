@@ -31,3 +31,8 @@ class Estoque:
                 if estoque["Quantidade"] <= 0:
                     self.estoque_cadastrado.remove(estoque)
                 break
+    
+    def editar_estoque(self, codigo_barras, novos_dados):
+        for estoque in self.estoque_cadastrado:
+            if estoque["Produto"].codigo_barras == codigo_barras:
+                estoque.update(novos_dados)
