@@ -1,5 +1,12 @@
 import unittest
-from Models.User import Usuario
+
+import sys 
+
+sys.path.append('Models')
+
+from User import Usuario
+
+
 
 class TestUsuario(unittest.TestCase):
     def test_init(self):
