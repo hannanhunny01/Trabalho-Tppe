@@ -8,9 +8,7 @@ from User import Usuario
 
 
 
-# test_usuario.py
-import unittest
-from User import Usuario
+
 
 class TestUsuario(unittest.TestCase):
     def test_init(self):
