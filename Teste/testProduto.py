@@ -31,7 +31,7 @@ class TestProduto(unittest.TestCase):
 
     def test_remover_produto(self):
         produto = Produto(descricao="Carro", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor B", categoria="Automovel")
-        self.assertFalse(produto.remover_produto())
+        self.assertFalse(produto.remover_produto("1234567890"))
 
 
 if __name__ == '__main__':
