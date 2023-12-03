@@ -25,6 +25,16 @@ class Produto:
 
         self.produtos_cadastrados.append(produto_info)
         print("Produto cadastrado com sucesso!")
+        
+    def remover_produto(self, codigo_barras):
+        for produto in self.produtos_cadastrados:
+            if produto["codigo_barras"] == codigo_barras:
+                self.produtos_cadastrados.remove(produto)
+                print(f"Produto com código de barras {codigo_barras} removido com sucesso.")
+                return
+        print(f"Produto com código de barras {codigo_barras} não encontrado.")
+
+
 
 
 
