@@ -35,6 +35,11 @@ class TestProduto(unittest.TestCase):
         self.assertFalse(produto.remover_produto("1234567890"))
         self.assertFalse(produto.remover_produto("17271364562"))
 
+    def test_editar_produto(self):
+        produto = Produto(descricao="Produto Teste", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor Teste", categoria="Categoria Teste")
+        self.assertFalse(produto.editar_produto())
+
+
 
 if __name__ == '__main__':
     unittest.main()
