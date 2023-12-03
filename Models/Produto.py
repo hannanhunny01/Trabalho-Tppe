@@ -25,7 +25,7 @@ class Produto:
 
         self.produtos_cadastrados.append(produto_info)
         print("Produto cadastrado com sucesso!")
-        
+
     def remover_produto(self, codigo_barras):
         for produto in self.produtos_cadastrados:
             if produto["codigo_barras"] == codigo_barras:
@@ -33,6 +33,15 @@ class Produto:
                 print(f"Produto com código de barras {codigo_barras} removido com sucesso.")
                 return
         print(f"Produto com código de barras {codigo_barras} não encontrado.")
+
+    def editar_produto(self, codigo_barras, novos_dados):
+        for produto in self.produtos_cadastrados:
+            if produto["codigo_barras"] == codigo_barras:
+                produto.update(novos_dados)
+                print(f"Produto com código de barras {codigo_barras} editado com sucesso.")
+                return
+        print(f"Produto com código de barras {codigo_barras} não encontrado.")
+
 
 
 
