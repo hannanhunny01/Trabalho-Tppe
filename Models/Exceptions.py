@@ -1,0 +1,2 @@
+class CodigoDeBarrasException(Exception):
+    pass

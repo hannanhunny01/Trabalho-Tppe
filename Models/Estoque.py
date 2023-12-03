@@ -1,3 +1,4 @@
+from Exceptions import CodigoDeBarrasException
 class Estoque:
     estoque_cadastrado = []
 
@@ -19,10 +20,10 @@ class Estoque:
         self.estoque_cadastrado.append(estoque_info)
 
     def verificar_estoque(self, codigo_barras):
-            for estoque in self.estoque_cadastrado:
-                if estoque["Produto"].codigo_barras == codigo_barras:
-                    return estoque["Quantidade"]
-            return 0
+        for estoque in self.estoque_cadastrado:
+            if estoque["Produto"].codigo_barras == codigo_barras:
+                return estoque["Quantidade"]
+        raise CodigoDeBarrasException(f"Produto com código de barras {codigo_barras} não encontrado no estoque.")
 
     def remover_estoque(self, codigo_barras, qnt_remover):
         for estoque in self.estoque_cadastrado:
@@ -31,8 +32,13 @@ class Estoque:
                 if estoque["Quantidade"] <= 0:
                     self.estoque_cadastrado.remove(estoque)
                 break
-    
+        else:
+            raise CodigoDeBarrasException(f"Produto com código de barras {codigo_barras} não encontrado no estoque.")
+
     def editar_estoque(self, codigo_barras, novos_dados):
         for estoque in self.estoque_cadastrado:
             if estoque["Produto"].codigo_barras == codigo_barras:
                 estoque.update(novos_dados)
+                break
+        else:
+            raise CodigoDeBarrasException(f"Produto com código de barras {codigo_barras} não encontrado no estoque.")
