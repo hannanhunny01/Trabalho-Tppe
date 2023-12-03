@@ -6,9 +6,11 @@ from Categoria import Categoria
 class TestCategoria(unittest.TestCase):
 
     def test_init_categoria(self):
-        categoria = Categoria(nome="Roupa")
+        categoria1 = Categoria(nome="Eletrônicos")
+        categoria2 = Categoria(nome="Roupas")
 
-        self.assertEqual(categoria.nome, "Roupa")
+        self.assertEqual(categoria1.nome, "Eletrônicos")
+        self.assertEqual(categoria2.nome, "Roupas")
 
 if __name__ == '__main__':
     unittest.main()
