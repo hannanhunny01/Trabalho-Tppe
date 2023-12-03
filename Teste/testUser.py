@@ -22,6 +22,8 @@ class TestUsuario(unittest.TestCase):
         usuario = Usuario("Abdul", "123456789", "abdul@email.com", "senha123")
         self.assertEqual(usuario.exibir_informacoes(), "Nome: Abdul\nTelefone: 123456789\nEmail: abdul@email.com")
         # Note que a senha não é exibida por questões de segurança
+    
+    
 
 if __name__ == '__main__':
     unittest.main()
