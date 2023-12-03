@@ -19,5 +19,9 @@ class TestTransacao(unittest.TestCase):
         self.assertEqual(transacao2.fornecedor, "LTDA RoupasCheirosas")
         self.assertEqual(transacao2.loja, "Mercado Jota")
 
+    def teste_fazer_transacao(self):
+        transacao = Transacao(produto="Creatina Turbo 300g", quantidade=50, fornecedor="LTDA BodyBuilder", loja="Loja de marombas")
+        self.assertFalse(transacao.fazer_transacao())
+
 if __name__ == '__main__':
     unittest.main()
