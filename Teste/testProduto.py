@@ -25,8 +25,10 @@ class TestProduto(unittest.TestCase):
         self.assertEqual(produto2.categoria, "Alimento")
 
     def test_cadastrar_produto(self):
-        produto = Produto(descricao="Produto Teste", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor Teste", categoria="Categoria Teste")
+        produto = Produto(descricao="Coxinha", codigo_barras="712736221", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Alimento")
+        produto2 = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=-10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Roupa")
         self.assertFalse(produto.cadastrar_produto())
+        self.assertFalse(produto2.cadastrar_produto())
 
 
 if __name__ == '__main__':
