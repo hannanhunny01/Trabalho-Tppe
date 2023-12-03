@@ -35,6 +35,10 @@ class TestCategoria(unittest.TestCase):
 
         categoria = Categoria(nome="Outro")
         self.assertFalse(categoria.remover_categoria())
+    
+    def test_editar_categoria(self):
+        categoria = Categoria(nome="Alimento")
+        self.assertTrue(categoria.editar_categoria("Alimentos")) 
 
 
 
