@@ -1,3 +1,5 @@
+from Categoria import Categoria
+
 class Produto:
     produtos_cadastrados = [] 
 
@@ -7,11 +9,16 @@ class Produto:
         self.custo = custo
         self.preco_venda = preco_venda
         self.fornecedor = fornecedor
-        self.categoria = categoria
+        # self.categoria = categoria
+        self.categoria = Categoria.obter_categoria_por_nome(categoria)
     
     def cadastrar_produto(self):
         if self.custo < 0 or self.preco_venda < 0:
             print("O custo e o preço de venda não podem ser negativos!")
+            return False
+
+        if self.categoria == False:
+            print("A categoria informada não existe ou não foi cadastrada!")
             return False
 
         produto_info = {
@@ -49,3 +56,4 @@ class Produto:
 
 if __name__ == '__main__':
     pass
+
