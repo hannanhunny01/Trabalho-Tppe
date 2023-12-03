@@ -37,8 +37,11 @@ class TestCategoria(unittest.TestCase):
         self.assertFalse(categoria.remover_categoria())
     
     def test_editar_categoria(self):
-        categoria = Categoria(nome="Alimento")
-        self.assertTrue(categoria.editar_categoria("Alimentos")) 
+        categoria = Categoria(nome="Eletrônicos")
+        self.assertTrue(categoria.editar_categoria("Eletrônico")) 
+
+        categoria = Categoria(nome="Roupas")
+        self.assertFalse(categoria.editar_categoria("Peças variadas"))
 
 
 
