@@ -38,6 +38,10 @@ class TestFornecedor(unittest.TestCase):
         fornecedor = Fornecedor(nome="Starlab")
         self.assertFalse(fornecedor.remover_fornecedor()) 
 
+    def test_editar_fornecedor(self):
+        fornecedor = Fornecedor(nome="Indústrias Stark")
+        self.assertTrue(fornecedor.editar_fornecedor("Indústrias Stark"))
+
 
 if __name__ == '__main__':
     unittest.main()
