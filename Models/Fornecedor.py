@@ -29,3 +29,13 @@ class Fornecedor:
         
         print(f"Fornecedor com código {fornecedor} não encontrado.")
         return False
+
+    def editar_fornecedor(self, novo_nome):
+        for fornecedor in Fornecedor.fornecedores_cadastrados:
+            if fornecedor.nome == self.nome:
+                fornecedor.nome = novo_nome
+                print(f"Fornecedor '{self.nome}' editado com sucesso!")
+                return True
+
+        print(f"O fornecedor '{self.nome}' não existe!")
+        return False
