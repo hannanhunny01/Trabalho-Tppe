@@ -31,6 +31,10 @@ class TestFornecedor(unittest.TestCase):
         self.assertEqual(Fornecedor.fornecedores_cadastrados[0].nome, "Indústrias Stark")
         self.assertEqual(Fornecedor.fornecedores_cadastrados[1].nome, "LexCorp")
 
+    def test_remover_fornecedor(self):
+        fornecedor = Fornecedor(nome="Indústrias Stark")
+        self.assertFalse(fornecedor.remover_fornecedor()) 
+
 
 if __name__ == '__main__':
     unittest.main()
