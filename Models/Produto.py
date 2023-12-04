@@ -9,7 +9,6 @@ class Produto:
         self.custo = custo
         self.preco_venda = preco_venda
         self.fornecedor = fornecedor
-        # self.categoria = categoria
         self.categoria = Categoria.obter_categoria_por_nome(categoria)
     
     def cadastrar_produto(self):
@@ -48,10 +47,6 @@ class Produto:
                 print(f"Produto com código de barras {codigo_barras} editado com sucesso.")
                 return
         print(f"Produto com código de barras {codigo_barras} não encontrado.")
-
-
-
-
 
 
 if __name__ == '__main__':

@@ -1,8 +1,9 @@
-import unittest
 import sys
+import unittest
 sys.path.append('../Models')
 from Produto import Produto
 from Categoria import Categoria
+
 
 class TestProduto(unittest.TestCase):
 

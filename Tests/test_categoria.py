@@ -1,7 +1,8 @@
-import unittest
 import sys
+import unittest
 sys.path.append('../Models')
 from Categoria import Categoria
+
 
 class TestCategoria(unittest.TestCase):
 

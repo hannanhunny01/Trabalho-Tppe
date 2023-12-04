@@ -1,5 +1,5 @@
-# usuario.py
 class Usuario:
+    
     def __init__(self, nome, telefone, email, senha):
         self.nome = nome
         self.telefone = telefone
@@ -29,8 +29,8 @@ class Usuario:
         return usuarios
 
 
-
 class Gerente(Usuario):
+
     def __init__(self, nome, telefone, email, senha, cpf, lojas):
         super().__init__(nome, telefone, email, senha)
         self.cpf = cpf
@@ -60,6 +60,7 @@ class Gerente(Usuario):
 
 
 class Funcionario(Usuario):
+
     def __init__(self, nome, telefone, email, senha, cpf, loja):
         super().__init__(nome, telefone, email, senha)
         self.cpf = cpf
