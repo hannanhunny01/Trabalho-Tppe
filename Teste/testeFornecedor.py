@@ -18,6 +18,10 @@ class TestFornecedor(unittest.TestCase):
         self.assertEqual(fornecedor1.nome, "LexCorp")
         self.assertEqual(fornecedor2.nome, "Starlab")
 
+    def test_cadastrar_fornecedor(self):
+        fornecedor = Fornecedor(nome="Indústrias Stark")
+        self.assertFalse(fornecedor.cadastrar_fornecedor())
+
 
 if __name__ == '__main__':
     unittest.main()
