@@ -21,10 +21,10 @@ class TestFornecedor(unittest.TestCase):
         self.assertEqual(fornecedor1.codigo_fornecedor, "001")
         self.assertEqual(fornecedor1.telefone, "123456789")
 
-        self.assertEqual(fornecedor1.nome, "StarLab")
-        self.assertEqual(fornecedor1.endereco, "Califórnia, EUA")
-        self.assertEqual(fornecedor1.codigo_fornecedor, "002")
-        self.assertEqual(fornecedor1.telefone, "987654321")
+        self.assertEqual(fornecedor2.nome, "StarLab")
+        self.assertEqual(fornecedor2.endereco, "Califórnia, EUA")
+        self.assertEqual(fornecedor2.codigo_fornecedor, "002")
+        self.assertEqual(fornecedor2.telefone, "987654321")
 
     def test_cadastrar_fornecedor(self):
         fornecedor1 = Fornecedor(nome="Indústrias Stark", endereco="Minesota, EUA", codigo_fornecedor="001", telefone="aaaaaa")
@@ -32,19 +32,21 @@ class TestFornecedor(unittest.TestCase):
         self.assertFalse(fornecedor1.cadastrar_produto())
         self.assertTrue(fornecedor2.cadastrar_produto())
 
-        self.assertEqual(len(Fornecedor.fornecedores_cadastrados), 2)
-        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].nome, "Indústrias Stark")
-        self.assertEqual(Fornecedor.fornecedores_cadastrados[1].nome, "LexCorp")
+        self.assertEqual(len(Fornecedor.fornecedores_cadastrados), 1)
+        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].nome, "StarLab")
+        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].endereco, "Califórnia, EUA")
+        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].codigo_fornecedor, "002")
+        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].telefone, "987654321")
 
     def test_remover_fornecedor(self):
-        fornecedor1 = Fornecedor(nome="Indústrias Stark", endereco="Minesota, EUA", codigo_fornecedor="001", telefone="aaaaaa")
+        fornecedor1 = Fornecedor(nome="Indústrias Stark", endereco="Minesota, EUA", codigo_fornecedor="001", telefone="123456789")
         fornecedor2 = Fornecedor(nome="StarLab", endereco="Califórnia, EUA", codigo_fornecedor="002", telefone="987654321")
         
-        Fornecedor.remover_fornecedor(fornecedor2.codigo_fornecedor)
+        Fornecedor.remover_fornecedor("002")
 
         self.assertEqual(len(Fornecedor.fornecedores_cadastrados), 1)
 
-        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].nome, fornecedor1.nome)
+        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].nome, fornecedor1)
 
     def test_editar_fornecedor(self):
         fornecedor = Fornecedor(nome="Indústrias Stark", endereco="Minesota, EUA", codigo_fornecedor="001", telefone="123456789")
