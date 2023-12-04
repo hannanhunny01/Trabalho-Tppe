@@ -15,14 +15,10 @@ class Fornecedor:
         if self.verificar_telefone:
             return False
 
-        if self.produto == False:
-            print("O produto informado não existe ou não foi cadastrado!")
-            return False
-
         fornecedor_info = {
             "nome": self.nome,
             "endereco": self.endereco,
-            "produto": self.produto,
+            "telefone": self.telefone,
             "codigo_fornecedor": self.codigo_fornecedor
         }
 
@@ -53,6 +49,13 @@ class Fornecedor:
         else:
             print(f'O telefone {telefone} é inválido.')
             return False
+
+    def obter_fornecedor_por_codigo_fornecedor(fornecedor):
+        for fornecedor in Fornecedor.fornecedores_cadastrados:
+            if fornecedor.codigo_fornecedor == fornecedor:
+                print(f"Fornecedor '{fornecedor}' encontrado!")
+                return fornecedor
+        return False
 
 
 if __name__ == '__main__':

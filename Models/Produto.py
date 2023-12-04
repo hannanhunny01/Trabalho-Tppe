@@ -1,4 +1,5 @@
 from Categoria import Categoria
+from Fornecedor import Fornecedor
 
 class Produto:
     produtos_cadastrados = [] 
@@ -8,8 +9,7 @@ class Produto:
         self.codigo_barras = codigo_barras
         self.custo = custo
         self.preco_venda = preco_venda
-        self.fornecedor = fornecedor
-        # self.categoria = categoria
+        self.fornecedor = Fornecedor.obter_fornecedor_por_codigo_fornecedor(fornecedor)
         self.categoria = Categoria.obter_categoria_por_nome(categoria)
     
     def cadastrar_produto(self):
@@ -19,6 +19,10 @@ class Produto:
 
         if self.categoria == False:
             print("A categoria informada não existe ou não foi cadastrada!")
+            return False
+        
+        if self.fornecedor == False:
+            print("O fornecedor informado não existe ou não foi cadastrado!")
             return False
 
         produto_info = {
