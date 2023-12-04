@@ -63,7 +63,7 @@ class TestProduto(unittest.TestCase):
 
         produto = Produto(descricao="Carro", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor B", categoria="Automovel")
         produto.cadastrar_produto()
-        self.assertFalse(produto.remover_produto("1234567890"))
+        self.assertTrue(produto.remover_produto("1234567890"))
         self.assertFalse(produto.remover_produto("17271364562"))
 
     def test_editar_produto(self):
@@ -72,8 +72,14 @@ class TestProduto(unittest.TestCase):
 
         produto = Produto(descricao="Coxinha", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Alimento")
         produto.cadastrar_produto()
-        self.assertFalse(produto.editar_produto("1234567890", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": 10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"}))
+        self.assertTrue(produto.editar_produto("1234567890", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": 10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"}))
         self.assertFalse(produto.editar_produto("1234567850", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": 10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"}))
+
+        with self.assertRaises(Exception):
+            produto.editar_produto("1234567890", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": -10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"})
+
+        with self.assertRaises(Exception):
+            produto.editar_produto("1234567890", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": 10.0, "preco_venda": -20.0, "fornecedor": "Forne2213", "categoria": "Alimento"})
 
 if __name__ == '__main__':
     unittest.main()
