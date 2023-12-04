@@ -9,38 +9,50 @@ sys.path.append('../Models')
 
 class TestFornecedor(unittest.TestCase):
 
-    def test_init_fornecedor(self):
-        fornecedor = Fornecedor(nome="Indústrias Stark")
-        fornecedor1 = Fornecedor(nome="LexCorp")
-        fornecedor2 = Fornecedor(nome="Starlab")
+    def test_init_produto(self):
+        fornecedor1 = Fornecedor("Indústrias Stark", "Minesota, EUA", "001", "123456789", "stark@stark.com")
+        fornecedor2 = Fornecedor("StarLab", "Califórnia, EUA", "002", "987654321", "starlab@starlab.com")
+        
+        fornecedor1.cadastrar_fornecedor()
+        fornecedor2.cadastrar_fornecedor()
 
-        self.assertEqual(fornecedor.nome, "Indústrias Stark")
-        self.assertEqual(fornecedor1.nome, "LexCorp")
-        self.assertEqual(fornecedor2.nome, "Starlab")
+        self.assertEqual(fornecedor1.nome, "Indústrias Stark")
+        self.assertEqual(fornecedor1.endereco, "Minesota, EUA")
+        self.assertEqual(fornecedor1.codigo_fornecedor, "001")
+        self.assertEqual(fornecedor1.telefone, "123456789")
+
+        self.assertEqual(fornecedor1.nome, "StarLab")
+        self.assertEqual(fornecedor1.endereco, "Califórnia, EUA")
+        self.assertEqual(fornecedor1.codigo_fornecedor, "002")
+        self.assertEqual(fornecedor1.telefone, "987654321")
 
     def test_cadastrar_fornecedor(self):
-        fornecedor = Fornecedor(nome="      ")
-        fornecedor1 = Fornecedor(nome="Indústrias Stark")
-        fornecedor2 = Fornecedor(nome="LexCorp")
-
-        self.assertFalse(fornecedor.cadastrar_fornecedor())
-        self.assertFalse(fornecedor1.cadastrar_fornecedor())
-        self.assertFalse(fornecedor2.cadastrar_fornecedor())
+        fornecedor1 = Fornecedor(nome="Indústrias Stark", endereco="Minesota, EUA", codigo_fornecedor="001", telefone="aaaaaa")
+        fornecedor2 = Fornecedor(nome="StarLab", endereco="Califórnia, EUA", codigo_fornecedor="002", telefone="987654321")
+        self.assertFalse(fornecedor1.cadastrar_produto())
+        self.assertTrue(fornecedor2.cadastrar_produto())
 
         self.assertEqual(len(Fornecedor.fornecedores_cadastrados), 2)
         self.assertEqual(Fornecedor.fornecedores_cadastrados[0].nome, "Indústrias Stark")
         self.assertEqual(Fornecedor.fornecedores_cadastrados[1].nome, "LexCorp")
 
     def test_remover_fornecedor(self):
-        fornecedor = Fornecedor(nome="Indústrias Stark")
-        self.assertTrue(fornecedor.remover_fornecedor()) 
+        fornecedor1 = Fornecedor(nome="Indústrias Stark", endereco="Minesota, EUA", codigo_fornecedor="001", telefone="aaaaaa")
+        fornecedor2 = Fornecedor(nome="StarLab", endereco="Califórnia, EUA", codigo_fornecedor="002", telefone="987654321")
+        
+        Fornecedor.remover_fornecedor(fornecedor2.codigo_fornecedor)
 
-        fornecedor = Fornecedor(nome="Starlab")
-        self.assertFalse(fornecedor.remover_fornecedor()) 
+        self.assertEqual(len(Fornecedor.fornecedores_cadastrados), 1)
+
+        self.assertEqual(Fornecedor.fornecedores_cadastrados[0].nome, fornecedor1.nome)
 
     def test_editar_fornecedor(self):
-        fornecedor = Fornecedor(nome="Indústrias Stark")
-        self.assertTrue(fornecedor.editar_fornecedor("Indústrias Stark"))
+        fornecedor = Fornecedor(nome="Indústrias Stark", endereco="Minesota, EUA", codigo_fornecedor="001", telefone="123456789")
+        fornecedor.cadastrar_fornecedor()
+
+        self.assertTrue(fornecedor.editar_fornecedor("001", {"nome": "LexCorp", "endereco": "Ohio, EUA", "codigo_fornecedor": "001", "telefone": "789456132"}))
+        
+        self.assertFalse(fornecedor.editar_fornecedor("007", {"nome": "LexCorp", "endereco": "Ohio, EUA", "codigo_fornecedor": "007", "telefone": "789456132"}))
 
 
 if __name__ == '__main__':
