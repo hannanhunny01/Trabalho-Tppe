@@ -2,6 +2,9 @@ import unittest
 import sys
 sys.path.append('../Models')
 from Transacao import Transacao
+from Produto import Produto
+from Estoque import Estoque
+from Loja_ex import Loja
 
 class TestTransacao(unittest.TestCase):
 
@@ -20,8 +23,16 @@ class TestTransacao(unittest.TestCase):
         self.assertEqual(transacao2.loja, "Mercado Jota")
 
     def teste_fazer_transacao(self):
-        transacao = Transacao(produto="Creatina Turbo 300g", quantidade=50, fornecedor="LTDA BodyBuilder", loja="Loja de marombas")
-        self.assertFalse(transacao.fazer_transacao())
+        produto1 = Produto(descricao="Creatina Turbo 300g", codigo_barras="1234567890", custo=10.0, preco_venda=27.0, fornecedor="LTDA BodyBuilder", categoria="Academia")
+        estoque1 = Estoque(produto=produto1, qnt_produto=400, data_entrada="2022-01-01", data_saida="2022-01-31", tipo_transacao="saida")
+        loja1 = Loja(nome="Loja de marombas", cnpj="12345678901234", endereco="Rua garibaldo 3, 123", representante="Gerlado fulano", estoques=estoque1, funcionarios=[])
+
+        transacao = Transacao(produto=produto1, quantidade=50, fornecedor="LTDA BodyBuilder", loja=loja1)
+
+        transacao.fazer_transacao()
+
+        self.assertEqual(loja1.estoques.qnt_produto, 350)
+
 
 if __name__ == '__main__':
     unittest.main()
