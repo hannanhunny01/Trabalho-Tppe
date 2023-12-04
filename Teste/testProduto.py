@@ -36,10 +36,18 @@ class TestProduto(unittest.TestCase):
         categoria2.cadastrar_categoria()
 
         produto = Produto(descricao="Coxinha", codigo_barras="712736221", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Alimento")
-        self.assertFalse(produto.cadastrar_produto())
+        self.assertTrue(produto.cadastrar_produto())
+        
         produto2 = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=-10.0, preco_venda=-20.0, fornecedor="Fornecedor B", categoria="Roupa")
         with self.assertRaises(Exception):
             produto2.cadastrar_produto()
+
+        produto3 = Produto(descricao="Camiseta", codigo_barras="712736221", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor B", categoria="Roupa")
+        self.assertFalse(produto3.cadastrar_produto())
+
+        produto4 = Produto(descricao="", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="122332", categoria="Alimento")
+        with self.assertRaises(Exception):
+            produto4.cadastrar_produto()
 
     def test_remover_produto(self):
         categoria1 = Categoria("Automovel")
