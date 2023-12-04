@@ -3,6 +3,7 @@ import sys
 sys.path.append('../Models')
 from Produto import Produto
 from Categoria import Categoria
+from Fornecedor import Fornecedor
 
 class TestProduto(unittest.TestCase):
 
@@ -12,21 +13,26 @@ class TestProduto(unittest.TestCase):
         categoria1.cadastrar_categoria()
         categoria2.cadastrar_categoria()
 
-        produto = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Fornecedor A", categoria="Roupa")
-        produto2 = Produto(descricao="Arroz", codigo_barras="0987654321", custo=15.0, preco_venda=25.0, fornecedor="Fornecedor B", categoria="Alimento")
+        fornecedor1 = Fornecedor("Indústrias Stark", "Minesota, EUA", "001", "123456789", "stark@stark.com")
+        fornecedor2 = Fornecedor("StarLab", "Califórnia, EUA", "002", "987654321", "starlab@starlab.com")
+        fornecedor1.cadastrar_categoria()
+        fornecedor2.cadastrar_categoria()
+
+        produto = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="Indústrias Stark", categoria="Roupa")
+        produto2 = Produto(descricao="Arroz", codigo_barras="0987654321", custo=15.0, preco_venda=25.0, fornecedor="StarLab", categoria="Alimento")
 
         self.assertEqual(produto.descricao, "Camiseta")
         self.assertEqual(produto.codigo_barras, "1234567890")
         self.assertEqual(produto.custo, 10.0)
         self.assertEqual(produto.preco_venda, 20.0)
-        self.assertEqual(produto.fornecedor, "Fornecedor A")
+        self.assertEqual(produto.fornecedor, "Indústrias Stark")
         self.assertEqual(produto.categoria, "Roupa")
 
         self.assertEqual(produto2.descricao, "Arroz")
         self.assertEqual(produto2.codigo_barras, "0987654321")
         self.assertEqual(produto2.custo, 15.0)
         self.assertEqual(produto2.preco_venda, 25.0)
-        self.assertEqual(produto2.fornecedor, "Fornecedor B")
+        self.assertEqual(produto2.fornecedor, "StarLab")
         self.assertEqual(produto2.categoria, "Alimento")
 
     def test_cadastrar_produto(self):
