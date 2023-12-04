@@ -29,7 +29,7 @@ class TestTransacao(unittest.TestCase):
         loja1 = Loja(nome="LTDA BodyBuilder", cnpj="23412341999223", endereco="Rua josivaldo 3, 123", representante="Gerlado fulano", estoques=estoque1, funcionarios=[])
         loja2 = Loja(nome="Loja de marombas", cnpj="12345678901234", endereco="Rua garibaldo 3, 123", representante="Gerlado fulano", estoques=estoque2, funcionarios=[])
 
-        transacao = Transacao(produto=produto1, quantidade=50, fornecedor="LTDA BodyBuilder", loja=loja2)
+        transacao = Transacao(produto=produto1, quantidade=50, fornecedor=loja1, loja=loja2)
 
         transacao.fazer_transacao()
 
