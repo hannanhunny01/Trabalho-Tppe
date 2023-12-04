@@ -12,7 +12,8 @@ class Fornecedor:
         self.codigo_fornecedor = codigo_fornecedor
     
     def cadastrar_fornecedor(self):
-        if self.verificar_telefone:
+        if not self.verificar_telefone(self.telefone):
+            print("Fornecedor não pode ser cadastrado devido a um telefone inválido.")
             return False
 
         fornecedor_info = {
@@ -24,24 +25,29 @@ class Fornecedor:
 
         self.fornecedores_cadastrados.append(fornecedor_info)
         print("Fornecedor cadastrado com sucesso!")
+        return True
 
     def remover_fornecedor(self, codigo_fornecedor):
         for fornecedor in self.fornecedores_cadastrados:
             if fornecedor["codigo_fornecedor"] == codigo_fornecedor:
                 self.fornecedores_cadastrados.remove(fornecedor)
                 print(f"Fornecedor com código {codigo_fornecedor} removido com sucesso.")
-                return
+                return fornecedor
         print(f"Fornecedor com código {fornecedor} não encontrado.")
+        return False
 
     def editar_fornecedor(self, codigo_fornecedor, novos_dados):
         for fornecedor in self.fornecedores_cadastrados:
             if fornecedor["codigo_fornecedor"] == codigo_fornecedor:
-                codigo_fornecedor.update(novos_dados)
-                print(f"Fornecedor com código {codigo_fornecedor} editado com sucesso.")
-                return
-        print(f"Fornecedor com código {codigo_fornecedor} não encontrado.")
+                for key, value in novos_dados.items():
+                    fornecedor[key] = value
+                print(f"Fornecedor '{self.nome}' editado com sucesso!")
+                return True
 
-    def verificar_telefone(telefone):
+        print(f"O fornecedor '{self.nome}' não existe!")
+        return False
+
+    def verificar_telefone(self, telefone):
         regexPadrao = re.compile(r'^\+?(\d{1,4}[\s-]?)?(\()?(\d{1,})\)?[\s-]?(\d{1,})[\s-]?(\d{1,})[\s-]?$')
 
         if regexPadrao.match(telefone):
