@@ -39,6 +39,14 @@ class Categoria:
     def editar_categoria(self, novo_nome):
         for categoria in Categoria.categorias_cadastradas:
             if categoria.nome == self.nome:
+                if novo_nome.strip() == "":
+                    print("Nome da categoria não pode ser vazio!")
+                    raise DescricaoEmBrancoException("Nome da categoria não pode ser vazio!")
+
+                if not novo_nome.isalpha():
+                    print("Nome da categoria deve conter apenas letras!")
+                    raise ValorInvalidoException("Nome da categoria deve conter apenas letras!")
+
                 categoria.nome = novo_nome
                 print(f"Categoria '{self.nome}' editada com sucesso!")
                 return True
