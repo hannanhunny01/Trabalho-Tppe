@@ -1,4 +1,5 @@
 from Categoria import Categoria
+from Exceptions import DescricaoEmBrancoException, ValorInvalidoException
 
 class Produto:
     produtos_cadastrados = [] 
@@ -15,7 +16,7 @@ class Produto:
     def cadastrar_produto(self):
         if self.custo < 0 or self.preco_venda < 0:
             print("O custo e o preço de venda não podem ser negativos!")
-            return False
+            raise ValorInvalidoException("O custo e o preço de venda não podem ser negativos!")
 
         if self.categoria == False:
             print("A categoria informada não existe ou não foi cadastrada!")
