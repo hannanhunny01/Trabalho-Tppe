@@ -1,4 +1,4 @@
-from Exceptions import CodigoDeBarrasException
+from Exceptions import *
 class Estoque:
     estoque_cadastrado = []
 
@@ -29,12 +29,14 @@ class Estoque:
         for estoque in self.estoque_cadastrado:
             if estoque["Produto"].codigo_barras == codigo_barras:
                 estoque["Quantidade"] -= qnt_remover
-                if estoque["Quantidade"] <= 0:
+                if estoque["Quantidade"] < 0:
+                    estoque["Quantidade"] = 0
+                    raise EstoqueNegativoException(f"Estoque do produto com código de barras {codigo_barras} não pode ser negativo.")
+                if estoque["Quantidade"] == 0:
                     self.estoque_cadastrado.remove(estoque)
                 break
         else:
             raise CodigoDeBarrasException(f"Produto com código de barras {codigo_barras} não encontrado no estoque.")
-
     def editar_estoque(self, codigo_barras, novos_dados):
         for estoque in self.estoque_cadastrado:
             if estoque["Produto"].codigo_barras == codigo_barras:
