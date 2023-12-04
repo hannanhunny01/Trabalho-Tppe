@@ -49,6 +49,14 @@ class TestProduto(unittest.TestCase):
         with self.assertRaises(Exception):
             produto4.cadastrar_produto()
 
+        produto5 = Produto(descricao="Camiseta", codigo_barras="12345ASD67890", custo=10.0, preco_venda=20.0, fornecedor="  ", categoria="Roupa")
+        with self.assertRaises(Exception):
+            produto5.cadastrar_produto()
+
+        produto6 = Produto(descricao="Camiseta", codigo_barras="1234567890", custo=10.0, preco_venda=20.0, fornecedor="  ", categoria="Roupa")
+        with self.assertRaises(Exception):
+            produto6.cadastrar_produto()
+
     def test_remover_produto(self):
         categoria1 = Categoria("Automovel")
         categoria1.cadastrar_categoria()
