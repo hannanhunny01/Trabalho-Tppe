@@ -58,7 +58,7 @@ class Loja:
         for loja in self.lojas_cadastradas:
             if loja['nome'] == nome:
                 print(f"Loja '{self.nome}' encontrada!")
-                return loja
+                return loja['nome']
         return False
 
     def listar_lojas(self):

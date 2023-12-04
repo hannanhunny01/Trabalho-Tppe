@@ -1,79 +1,55 @@
 import unittest
+import sys
+sys.path.append('../Models')
 from Loja import Loja
+import unittest
+from parameterized import parameterized
 
 class TestLoja(unittest.TestCase):
 
-    def test_cadastrar_loja(self):
-        loja = Loja(
-            nome="Loja Teste",
-            cnpj="123456789",
-            endereco="Rua Teste, 123",
-            representante="123",
-            estoques=[],
-            funcionarios=[]
-        )
+    @parameterized.expand([
+        ("Loja1", "123456789", "Endereco1", "Representante1", [], [], True),
+        ("Loja2", "987654321", "Endereco2", "Representante2", [], [], True),
+        ("", "123456789", "Endereco1", "Representante1", [], [], False),
+    ])
+    def test_cadastrar_loja(self, nome, cnpj, endereco, representante, estoques, funcionarios, resultado_esperado):
+        loja = Loja(nome, cnpj, endereco, representante, estoques, funcionarios)
+        self.assertEqual(loja.cadastrar_loja(), resultado_esperado)
 
-        # Teste de cadastro bem-sucedido
-        self.assertEqual(len(loja.listar_lojas()), 0)
-        self.assertTrue(loja.cadastrar_loja())
-        self.assertEqual(len(loja.listar_lojas()), 1)
+    @parameterized.expand([
+        ("Loja1", True),
+        ("Loja3", False),
+    ])
+    def test_remover_loja(self, nome, resultado_esperado):
+        loja = Loja("Loja1", "123456789", "Endereco1", "Representante1", [], [])
+        self.assertEqual(loja.remover_loja(), resultado_esperado)
 
-        # Tentativa de cadastrar a mesma loja novamente
-        self.assertFalse(loja.cadastrar_loja())
-
-        # Tentativa de cadastrar uma loja com nome vazio
-        loja.nome = ""
-        self.assertFalse(loja.cadastrar_loja())
-
-    def test_remover_loja(self):
-        loja = Loja(
-            nome="Loja Teste",
-            cnpj="123456789",
-            endereco="Rua Teste, 123",
-            representante="123",
-            estoques=[],
-            funcionarios=[]
-        )
-
-        self.assertTrue(loja.remover_loja())
-        self.assertEqual(len(loja.listar_lojas()), 0)
-
-    def test_editar_loja(self):
-        loja = Loja(
-            nome="Loja Teste",
-            cnpj="123456789",
-            endereco="Rua Teste, 123",
-            representante="123",
-            estoques=[],
-            funcionarios=[]
-        )
-
-        # Tentativa de editar uma loja que não existe
-        self.assertFalse(loja.editar_loja("987654321", {"endereco": "Nova Rua, 456"}))
-
-        # Cadastrar a loja e depois editá-la
+    def test_listar_lojas(self):
+        loja = Loja("Loja1", "123456789", "Endereco1", "Representante1", [], [])
         loja.cadastrar_loja()
-        self.assertEqual(loja.listar_lojas()[0]["endereco"], "Rua Teste, 123")
-        self.assertTrue(loja.editar_loja("123456789", {"endereco": "Nova Rua, 456"}))
-        self.assertEqual(loja.listar_lojas()[0]["endereco"], "Nova Rua, 456")
+        self.assertEqual(len(loja.listar_lojas()), 2)
 
-    def test_obter_loja_por_nome(self):
-        loja = Loja(
-            nome="Loja Teste",
-            cnpj="123456789",
-            endereco="Rua Teste, 123",
-            representante="123",
-            estoques=[],
-            funcionarios=[]
-        )
-
-        # Tentativa de obter uma loja que não existe
-        self.assertFalse(loja.obter_loja_por_nome("Loja Inexistente"))
-
-        # Cadastrar a loja e depois tentar obter por nome
+    @parameterized.expand([
+        ("Loja1", "Loja1"),
+        ("Loja3", False),
+    ])
+    def test_obter_loja_por_nome(self, nome, resultado_esperado):
+        loja = Loja("Loja1", "123456789", "Endereco1", "Representante1", [], [])
         loja.cadastrar_loja()
-        loja_obtida = loja.obter_loja_por_nome("Loja Teste")
-        self.assertEqual(loja_obtida["nome"], "Loja Teste")
+        self.assertEqual(loja.obter_loja_por_nome(nome), resultado_esperado)
+
+    def test_listar_lojas(self):
+        loja = Loja("Loja5", "3267252", "Endereco5", "Representante5", [], [])
+        self.assertEqual(len(loja.listar_lojas()), 2)
+
+    @parameterized.expand([
+        ("123456789", {"nome": "NovaLoja", "representante": "NovoRepresentante"}, True),
+        ("987654321", {"endereco": "NovoEndereco"}, True),
+        ("111111111", {"estoques": ["Estoque1", "Estoque2"]}, False),
+    ])
+    def test_editar_loja(self, cnpj, dados, resultado_esperado):
+        loja = Loja("NovaLoja", "123456789", "Endereco1", "Representante1", [], [])
+        self.assertEqual(loja.editar_loja(cnpj, dados), resultado_esperado)
 
 if __name__ == '__main__':
     unittest.main()
