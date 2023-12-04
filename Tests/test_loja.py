@@ -1,9 +1,6 @@
 import unittest
 from Loja import Loja
 
-import unittest
-from Loja import Loja
-
 class TestLoja(unittest.TestCase):
 
     def test_cadastrar_loja(self):

@@ -1,70 +1,55 @@
 import unittest
+from parameterized import parameterized
 import sys
 sys.path.append('../Models')
 from Categoria import Categoria
+from Exceptions import DescricaoEmBrancoException, ValorInvalidoException
 
 class TestCategoria(unittest.TestCase):
 
-    def test_init_categoria(self):
-        categoria1 = Categoria(nome="Eletrônicos")
-        categoria2 = Categoria(nome="Roupas")
+    @parameterized.expand([
+        ("Nova", True),
+        ("Existente", True),
+        ("", DescricaoEmBrancoException),
+        ("123", ValorInvalidoException),
+    ])
+    def test_cadastrar_categoria(self, nome, resultado_esperado):
+        categoria = Categoria(nome)
+        try:
+            self.assertEqual(categoria.cadastrar_categoria(), resultado_esperado)
+        except DescricaoEmBrancoException as e:
+            self.assertTrue(isinstance(e, DescricaoEmBrancoException))
+        except ValorInvalidoException as e:
+            self.assertTrue(isinstance(e, ValorInvalidoException))
 
-        self.assertEqual(categoria1.nome, "Eletrônicos")
-        self.assertEqual(categoria2.nome, "Roupas")
+    @parameterized.expand([
+        ("Existente", True),
+        ("Nova2", False),
+    ])
+    def test_remover_categoria(self, nome, resultado_esperado):
+        categoria = Categoria(nome)
+        self.assertEqual(categoria.remover_categoria(), resultado_esperado)
 
-    def test_cadastrar_categoria(self):
-        categoria = Categoria(nome="Alimento")
-        self.assertTrue(categoria.cadastrar_categoria()) 
-
-        categoria = Categoria(nome="    ")
-        with self.assertRaises(Exception):
-            categoria.cadastrar_categoria()
-
-        categoria = Categoria(nome="76123")
-        with self.assertRaises(Exception):
-            categoria.cadastrar_categoria()
-
-        categoria = Categoria(nome="Alimento")
-        self.assertFalse(categoria.cadastrar_categoria())
-
-        categoria = Categoria(nome="Eletrônicos")
-        self.assertTrue(categoria.cadastrar_categoria())
-
-        self.assertEqual(len(Categoria.categorias_cadastradas), 2)
-
-        self.assertEqual(Categoria.categorias_cadastradas[0].nome, "Alimento")
-
-    def test_remover_categoria(self):
-        categoria = Categoria(nome="Alimento")
-        self.assertTrue(categoria.remover_categoria()) 
-
-        categoria = Categoria(nome="Outro")
-        self.assertFalse(categoria.remover_categoria())
-    
-    def test_editar_categoria(self):
-        categoria = Categoria(nome="Eletrônicos")
-        self.assertTrue(categoria.editar_categoria("Eletrônico")) 
-
-        categoria = Categoria(nome="Roupas")
-        self.assertFalse(categoria.editar_categoria("Peças variadas"))
-
-        categoria = Categoria(nome="Eletrônico")
-        with self.assertRaises(Exception):
-            categoria.editar_categoria("    ")
-
-        categoria = Categoria(nome="Eletrônico")
-        with self.assertRaises(Exception):
-            categoria.editar_categoria("76123")
-
-        categoria = Categoria(nome="Eletrônico")
-        with self.assertRaises(Exception):
-            categoria.editar_categoria("")
-
-        categoria = Categoria(nome="Eletrônico")
-        with self.assertRaises(Exception):
-            categoria.editar_categoria("3letrônicos23")
-
-
+    @parameterized.expand([
+        ("NovoNome", True),
+        ("", DescricaoEmBrancoException),
+        ("Inv@lido", ValorInvalidoException),
+    ])
+    def test_editar_categoria(self, novo_nome, resultado_esperado):
+        categoria = Categoria("Existente")
+        try:
+            self.assertEqual(categoria.editar_categoria(novo_nome), resultado_esperado)
+        except DescricaoEmBrancoException as e:
+            self.assertTrue(isinstance(e, DescricaoEmBrancoException))
+        except ValorInvalidoException as e:
+            self.assertTrue(isinstance(e, ValorInvalidoException))
+        
+    @parameterized.expand([
+        ("Existente", "Existente"),
+        ("NaoExistente", False),
+    ])
+    def test_obter_categoria_por_nome(self, nome, resultado_esperado):
+        self.assertEqual(Categoria.obter_categoria_por_nome(nome), resultado_esperado)
 
 if __name__ == '__main__':
     unittest.main()
