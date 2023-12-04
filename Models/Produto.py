@@ -106,13 +106,10 @@ class Produto:
                     print("Categoria deve conter apenas letras!")
                     raise ValorInvalidoException("Categoria deve conter apenas letras!")
                 
-                if novos_dados["categoria"] == False:
-                    print("A categoria informada não existe ou não foi cadastrada!")
-                    return False
-                
                 produto.update(novos_dados)
                 print(f"Produto com código de barras {codigo_barras} editado com sucesso.")
                 return True
+            
         print(f"Produto com código de barras {codigo_barras} não encontrado.")
         return False
 
