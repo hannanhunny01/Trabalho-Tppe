@@ -1,8 +1,7 @@
-import sys
 import unittest
+import sys
 sys.path.append('../Models')
 from Categoria import Categoria
-
 
 class TestCategoria(unittest.TestCase):
 
@@ -18,7 +17,12 @@ class TestCategoria(unittest.TestCase):
         self.assertTrue(categoria.cadastrar_categoria()) 
 
         categoria = Categoria(nome="    ")
-        self.assertFalse(categoria.cadastrar_categoria())
+        with self.assertRaises(Exception):
+            categoria.cadastrar_categoria()
+
+        categoria = Categoria(nome="76123")
+        with self.assertRaises(Exception):
+            categoria.cadastrar_categoria()
 
         categoria = Categoria(nome="Alimento")
         self.assertFalse(categoria.cadastrar_categoria())
@@ -43,6 +47,22 @@ class TestCategoria(unittest.TestCase):
 
         categoria = Categoria(nome="Roupas")
         self.assertFalse(categoria.editar_categoria("Peças variadas"))
+
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("    ")
+
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("76123")
+
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("")
+
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("3letrônicos23")
 
 
 
