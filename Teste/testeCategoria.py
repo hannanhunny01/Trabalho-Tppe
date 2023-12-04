@@ -20,6 +20,10 @@ class TestCategoria(unittest.TestCase):
         with self.assertRaises(Exception):
             categoria.cadastrar_categoria()
 
+        categoria = Categoria(nome="76123")
+        with self.assertRaises(Exception):
+            categoria.cadastrar_categoria()
+
         categoria = Categoria(nome="Alimento")
         self.assertFalse(categoria.cadastrar_categoria())
 
