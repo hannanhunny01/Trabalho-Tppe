@@ -1,3 +1,5 @@
+from Exceptions import DescricaoEmBrancoException, ValorInvalidoException
+
 class Categoria:
     categorias_cadastradas = []
 
@@ -13,7 +15,7 @@ class Categoria:
 
         if self.nome.strip() == "":
             print("Nome da categoria não pode ser vazio!")
-            return False
+            raise DescricaoEmBrancoException("Nome da categoria não pode ser vazio!")
 
         nova_categoria = Categoria(self.nome)
         Categoria.categorias_cadastradas.append(nova_categoria)
