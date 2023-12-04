@@ -21,6 +21,35 @@ class Produto:
         if self.categoria == False:
             print("A categoria informada não existe ou não foi cadastrada!")
             return False
+        
+        if self.descricao.strip() == "":
+            print("Descrição do produto não pode ser vazio!")
+            raise DescricaoEmBrancoException("Descrição do produto não pode ser vazio!")
+        
+        if not self.descricao.isalpha():
+            print("Descrição do produto deve conter apenas letras!")
+            raise ValorInvalidoException("Descrição do produto deve conter apenas letras!")
+        
+        if not self.codigo_barras.isnumeric():
+            print("Código de barras deve conter apenas números!")
+            raise ValorInvalidoException("Código de barras deve conter apenas números!")
+        
+        if self.fornecedor.isnumeric():
+            print("Fornecedor deve conter apenas letras!")
+            raise ValorInvalidoException("Fornecedor deve conter apenas letras!")
+        
+        if self.fornecedor.strip() == "":
+            print("Fornecedor não pode ser vazio!")
+            raise DescricaoEmBrancoException("Fornecedor não pode ser vazio!")
+        
+        if not self.categoria.isalpha():
+            print("Categoria deve conter apenas letras!")
+            raise ValorInvalidoException("Categoria deve conter apenas letras!")
+        
+        for produto in self.produtos_cadastrados:
+            if produto["codigo_barras"] == self.codigo_barras:
+                print(f"O produto com código de barras {self.codigo_barras} já existe!")
+                return False
 
         produto_info = {
             "descricao": self.descricao,
@@ -33,6 +62,8 @@ class Produto:
 
         self.produtos_cadastrados.append(produto_info)
         print("Produto cadastrado com sucesso!")
+
+        return True
 
     def remover_produto(self, codigo_barras):
         for produto in self.produtos_cadastrados:
