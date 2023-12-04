@@ -16,6 +16,10 @@ class Categoria:
         if self.nome.strip() == "":
             print("Nome da categoria não pode ser vazio!")
             raise DescricaoEmBrancoException("Nome da categoria não pode ser vazio!")
+        
+        if not self.nome.isalpha():
+            print("Nome da categoria deve conter apenas letras!")
+            raise ValorInvalidoException("Nome da categoria deve conter apenas letras!")
 
         nova_categoria = Categoria(self.nome)
         Categoria.categorias_cadastradas.append(nova_categoria)
