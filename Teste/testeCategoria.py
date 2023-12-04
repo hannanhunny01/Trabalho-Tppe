@@ -56,6 +56,14 @@ class TestCategoria(unittest.TestCase):
         with self.assertRaises(Exception):
             categoria.editar_categoria("76123")
 
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("")
+
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("3letrônicos23")
+
 
 
 if __name__ == '__main__':
