@@ -35,6 +35,25 @@ class TestTransacao(unittest.TestCase):
 
         self.assertEqual(loja1.estoques.qnt_produto, 350)
         self.assertEqual(loja2.estoques.qnt_produto, 100)
+    
+    def teste_desfazer_transacao(self):
+       produto1 = Produto(descricao="Creatina Turbo 300g", codigo_barras="1234567890", custo=10.0, preco_venda=27.0, fornecedor="LTDA BodyBuilder", categoria="Academia")
+       estoque1 = Estoque(produto=produto1, qnt_produto=400, data_entrada="2022-01-01", data_saida="2022-01-31", tipo_transacao="saida")
+       estoque2 = Estoque(produto=produto1, qnt_produto=50, data_entrada="2022-01-01", data_saida="2022-01-31", tipo_transacao="entrada")
+       loja1 = Loja(nome="LTDA BodyBuilder", cnpj="23412341999223", endereco="Rua josivaldo 3, 123", representante="Gerlado fulano", estoques=estoque1, funcionarios=[])
+       loja2 = Loja(nome="Loja de marombas", cnpj="12345678901234", endereco="Rua garibaldo 3, 123", representante="Gerlado fulano", estoques=estoque2, funcionarios=[])
+
+       transacao = Transacao(produto=produto1, quantidade=50, fornecedor=loja1, loja=loja2)
+
+       transacao.fazer_transacao()
+
+       self.assertEqual(loja1.estoques.qnt_produto, 350)
+       self.assertEqual(loja2.estoques.qnt_produto, 100)
+
+       transacao.desfazer_transacao()
+
+       self.assertEqual(loja1.estoques.qnt_produto, 400)
+       self.assertEqual(loja2.estoques.qnt_produto, 50)
 
 
 if __name__ == '__main__':
