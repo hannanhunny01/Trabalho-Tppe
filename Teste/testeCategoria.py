@@ -48,6 +48,14 @@ class TestCategoria(unittest.TestCase):
         categoria = Categoria(nome="Roupas")
         self.assertFalse(categoria.editar_categoria("Peças variadas"))
 
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("    ")
+
+        categoria = Categoria(nome="Eletrônico")
+        with self.assertRaises(Exception):
+            categoria.editar_categoria("76123")
+
 
 
 if __name__ == '__main__':
