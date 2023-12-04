@@ -17,7 +17,8 @@ class TestCategoria(unittest.TestCase):
         self.assertTrue(categoria.cadastrar_categoria()) 
 
         categoria = Categoria(nome="    ")
-        self.assertFalse(categoria.cadastrar_categoria())
+        with self.assertRaises(Exception):
+            categoria.cadastrar_categoria()
 
         categoria = Categoria(nome="Alimento")
         self.assertFalse(categoria.cadastrar_categoria())
