@@ -81,5 +81,11 @@ class TestProduto(unittest.TestCase):
         with self.assertRaises(Exception):
             produto.editar_produto("1234567890", {"descricao": "Coxinha", "codigo_barras": "1234567890", "custo": 10.0, "preco_venda": -20.0, "fornecedor": "Forne2213", "categoria": "Alimento"})
 
+        with self.assertRaises(Exception):
+            produto.editar_produto("1234567890", {"descricao": "    ", "codigo_barras": "123456ADS7890", "custo": 10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"})
+
+        with self.assertRaises(Exception):
+            produto.editar_produto("1234567890", {"descricao": "Coxinha", "codigo_barras": "ASDAAS123", "custo": 10.0, "preco_venda": 20.0, "fornecedor": "Fornecedor A", "categoria": "Alimento"})
+
 if __name__ == '__main__':
     unittest.main()
