@@ -10,8 +10,8 @@ sys.path.append('../Models')
 class TestFornecedor(unittest.TestCase):
 
     def test_init_produto(self):
-        fornecedor1 = Fornecedor("Indústrias Stark", "Minesota, EUA", "001", "123456789", "stark@stark.com")
-        fornecedor2 = Fornecedor("StarLab", "Califórnia, EUA", "002", "987654321", "starlab@starlab.com")
+        fornecedor1 = Fornecedor("Indústrias Stark", "Minesota, EUA", "001", "123456789")
+        fornecedor2 = Fornecedor("StarLab", "Califórnia, EUA", "002", "987654321")
         
         fornecedor1.cadastrar_fornecedor()
         fornecedor2.cadastrar_fornecedor()
