@@ -63,3 +63,18 @@ class Loja:
 
     def listar_lojas(self):
         return self.lojas_cadastradas
+    
+    def associar_funcionario(self, cpf):
+        for loja in self.lojas_cadastradas:
+            if loja["cnpj"] == self.cnpj:
+                loja["funcionarios"].append(cpf)
+    
+    def desassociar_funcionario(self, cpf):
+        for loja in self.lojas_cadastradas:
+            if loja["cnpj"] == self.cnpj:
+                loja["funcionarios"].remove(cpf)
+    
+    def associar_representante(self, cpf):
+        for loja in self.lojas_cadastradas:
+            if loja["cnpj"] == self.cnpj:
+                loja["representante"] = cpf
