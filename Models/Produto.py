@@ -70,16 +70,51 @@ class Produto:
             if produto["codigo_barras"] == codigo_barras:
                 self.produtos_cadastrados.remove(produto)
                 print(f"Produto com código de barras {codigo_barras} removido com sucesso.")
-                return
+                return True
         print(f"Produto com código de barras {codigo_barras} não encontrado.")
+        return False
 
     def editar_produto(self, codigo_barras, novos_dados):
         for produto in self.produtos_cadastrados:
             if produto["codigo_barras"] == codigo_barras:
+
+                if novos_dados["custo"] < 0 or novos_dados["preco_venda"] < 0:
+                    print("O custo e o preço de venda não podem ser negativos!")
+                    raise ValorInvalidoException("O custo e o preço de venda não podem ser negativos!")
+                
+                if novos_dados["descricao"].strip() == "":
+                    print("Descrição do produto não pode ser vazio!")
+                    raise DescricaoEmBrancoException("Descrição do produto não pode ser vazio!")
+                
+                if not novos_dados["descricao"].isalpha():
+                    print("Descrição do produto deve conter apenas letras!")
+                    raise ValorInvalidoException("Descrição do produto deve conter apenas letras!")
+                
+                if not novos_dados["codigo_barras"].isnumeric():
+                    print("Código de barras deve conter apenas números!")
+                    raise ValorInvalidoException("Código de barras deve conter apenas números!")
+                
+                if novos_dados["fornecedor"].isnumeric():
+                    print("Fornecedor deve conter apenas letras!")
+                    raise ValorInvalidoException("Fornecedor deve conter apenas letras!")
+                
+                if novos_dados["fornecedor"].strip() == "":
+                    print("Fornecedor não pode ser vazio!")
+                    raise DescricaoEmBrancoException("Fornecedor não pode ser vazio!")
+                
+                if not novos_dados["categoria"].isalpha():
+                    print("Categoria deve conter apenas letras!")
+                    raise ValorInvalidoException("Categoria deve conter apenas letras!")
+                
+                if novos_dados["categoria"] == False:
+                    print("A categoria informada não existe ou não foi cadastrada!")
+                    return False
+                
                 produto.update(novos_dados)
                 print(f"Produto com código de barras {codigo_barras} editado com sucesso.")
-                return
+                return True
         print(f"Produto com código de barras {codigo_barras} não encontrado.")
+        return False
 
 
 
